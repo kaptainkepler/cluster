@@ -43,6 +43,7 @@ Feature future, wishlist e idee per contribuire al progetto.
 - 📋 Descrizione progetto e caratteristiche
 - ⚠️ **Disclaimer importante** (responsabilità e sicurezza)
 - 🏗️ Architettura generale
+- 🤔 **Scelta dello stack tecnologico** (perché React/Electron)
 - ⚙️ Requisiti di sistema
 - 🚀 Setup completo step-by-step
 - 🎯 Avvio del progetto (locale e Raspberry)
@@ -406,14 +407,17 @@ const variabile = valore;
 **Ultimo aggiornamento**: Novembre 2025 
 
 ### Changelog
-- ✅ README principale completo
+- ✅ README principale completo con spiegazione scelte tecnologiche
 - ✅ Quick Start Guide
-- ✅ Lista Hardware completa
+- ✅ Lista Hardware completa con fusibili e protezioni
+- ✅ Roadmap & Wishlist con 49+ idee per contribuire
 - ✅ Configurazione Client dettagliata
-- ✅ Configurazione Server e Hardware completa
+- ✅ Configurazione Server e Hardware completa con schema elettrico ufficiale
 - ✅ Architettura e documentazione tecnica
 - ✅ Indice navigazione (questo file)
 - ✅ Template GitHub (issues, PR, contributing)
+- ✅ Licenza GPL-3.0 e header in tutti i file sorgente
+- ✅ Autori e contributori documentati
 
 
 

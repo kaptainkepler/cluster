@@ -69,6 +69,39 @@ cluster/
 - **Desktop**: Electron 36
 - **Hardware**: Raspberry Pi 4B, ELM327, DS18B20, ADS1115
 
+### 🤔 Ma React + Electron su un Automotive?! Siete Pazzi?
+
+Sì, lo sappiamo. Qualsiasi ingegnere embedded che vede questo progetto probabilmente sta avendo un attacco di panico.
+
+**Come andrebbero fatte le cose per bene:**
+- **C/C++** - Perché JavaScript su un'auto è come mettere le ruote quadrate
+- **Qt/QML** - Lo standard dell'industria (Tesla, Audi, BMW lo usano)
+- **Yocto/Buildroot** - Linux embedded serio, non Raspberry Pi OS con tutto il ciarpame
+- **Direct framebuffer** - Non Electron che gira un intero browser per mostrare 4 numeri
+
+**E allora perché React/Electron/Node.js?**
+
+Perché è un **progetto hobbistico** e vogliamo **divertirci**, non impazzire.
+
+**Pro del nostro approccio discutibile**:
+- ⚡ **Veloce da sviluppare** - Hai visto Three.js? Fai un modello 3D in 5 minuti. Prova con OpenGL nativo.
+- 🎨 **Librerie ovunque** - npm ha tutto. C++ ha... ehm... boost?
+- 🧑‍💻 **Accessibile** - Sai React? Benvenuto. Sai CMake? Condoglianze.
+- 🐛 **Debug** - F12 e vedi tutto. GDB invece è... un'esperienza.
+- 🚀 **Divertimento** - Più tempo a smanettare, meno a bestemmiare con toolchain
+- 💡 **Prova il concetto** - Funziona? Bene! Poi si vedrà.
+
+**Contro (che accettiamo consapevolmente)**:
+- 💾 **Mangia RAM** come fosse pasta (~500MB vs ~50MB)
+- 🐌 **Boot lento** (~40s vs ~3s, ma tanto la Panda ci mette di più ad accendersi)
+- 🔋 **Consuma** più di quanto dovrebbe
+- 📊 **JavaScript** - Sì, JavaScript. Su un'auto. Deal with it.
+
+**Il punto è**: Stiamo parlando di una **Panda del 1990**. Non è un F-35. Non deve andare sulla Luna.  
+Deve mostrarti i giri motore in modo figo mentre ascolti i Pink Floyd. E questo lo fa benissimo. 🚗💨
+
+> 💡 **Vuoi rifarlo in C++/Qt "come si deve"?** Fantastico! Apri pure un fork e ti aiutiamo. Ma non lamentarti quando dopo 3 settimane stai ancora debuggando un segfault nel thread del rendering. Noi intanto ci godiamo l'hot reload. 😎
+
 ---
 
 ## ⚙️ Requisiti di Sistema
