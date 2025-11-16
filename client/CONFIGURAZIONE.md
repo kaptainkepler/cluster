@@ -405,12 +405,5 @@ npm start
 
 ---
 
-## 📄 Licenza
-
-PandaOS è software libero rilasciato sotto **GNU General Public License v3.0 or later**.  
-Vedi [LICENSE](../LICENSE) per i dettagli completi.
-
----
-
 **Ultimo aggiornamento**: v0.9.0
 

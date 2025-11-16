@@ -62,12 +62,14 @@ cluster/
 ### Per Raspberry Pi (Produzione)
 
 - **Hardware**:
-  - Raspberry Pi 4B (4GB o superiore consigliato)
-  - Adattatore ELM327 (porta seriale `/dev/ttyUSB0`)
-  - Optoaccoppiatori per rilevamento spie
+  - Raspberry Pi 4B (4GB o superiore consigliato) o Raspberry Pi 5
+  - Adattatore ELM327 USB (porta seriale `/dev/ttyUSB0`)
+  - Optoaccoppiatori per rilevamento spie (PC817 o simili)
+  - Display LCD ultra-wide (1920×480 consigliato)
   - Sensore temperatura DS18B20 (opzionale)
   - Convertitore ADC ADS1115 (opzionale, per sensore carburante)
-  - Display HDMI (1920x580 ottimizzato)
+
+📋 **Lista completa hardware**: Vedi [HARDWARE.md](HARDWARE.md) per dettagli su tutti i componenti necessari
 
 - **Sistema Operativo**:
   - Raspberry Pi OS (Debian-based)

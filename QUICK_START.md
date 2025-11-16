@@ -64,6 +64,8 @@ npm start
 
 ## 📋 Checklist Hardware (Raspberry Pi)
 
+> 💡 **Hai bisogno di acquistare componenti?** Consulta [HARDWARE.md](HARDWARE.md) per la lista completa di tutto il necessario.
+
 Prima di avviare in produzione, verifica:
 
 - [ ] ELM327 collegato a porta USB (`/dev/ttyUSB0`)
@@ -203,13 +205,6 @@ Hai problemi?
 3. **Contribuisci**:
    - [✨ Feature Request](.github/ISSUE_TEMPLATE/feature_request.md) - Proponi miglioramenti
    - [CONTRIBUTING.md](.github/CONTRIBUTING.md) - Guida per contribuire
-
----
-
-## 📄 Licenza
-
-PandaOS è software libero rilasciato sotto **GNU General Public License v3.0 or later**.  
-Vedi [LICENSE](LICENSE) per i dettagli completi.
 
 ---
 

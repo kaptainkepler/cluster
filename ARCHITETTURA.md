@@ -906,21 +906,5 @@ this.pressureService.startReading();
 
 ---
 
-## 📄 Licenza
-
-PandaOS è software libero rilasciato sotto **GNU General Public License v3.0 or later**.  
-Vedi [LICENSE](LICENSE) per i dettagli completi.
-
----
-
-## 👨‍💻 Autori
-
-- **[Matteo Errera](https://github.com/matteoerrera)** - Lead Developer
-- **[Roberto Zaccardi](https://github.com/rzaccardi)** - Co-Developer
-- **[Ludovico Verde](https://www.instagram.com/ludovico.verdee/)** - Design & Creative
-
----
-
-**Ultimo aggiornamento**: v0.9.0  
-**Team**: PandaOS - Cyberpandino
+**Ultimo aggiornamento**: v0.9.0
 

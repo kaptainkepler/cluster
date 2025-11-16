@@ -76,7 +76,22 @@ Architettura tecnica, flussi dati e guide per aggiungere funzionalità.
 
 ---
 
-### 4. [server/CONFIGURAZIONE_SERVER.md](server/CONFIGURAZIONE_SERVER.md) - Setup Hardware e Server
+### 4. [HARDWARE.md](HARDWARE.md) - Lista Hardware
+**Contenuto**:
+- 🛒 Componenti essenziali (Raspberry Pi, ELM327, Display)
+- 🔌 Sensori opzionali (DS18B20, ADS1115)
+- 📺 Specifiche display LCD utilizzato
+- 🔗 Accessori e cablaggio necessari
+- 💰 Stima costi indicativi
+- 📦 Kit consigliati
+- 🔍 Note tecniche e compatibilità
+- ⚠️ Disclaimer hardware
+
+**Per Chi**: Chi deve acquistare componenti, hardware builders
+
+---
+
+### 5. [server/CONFIGURAZIONE_SERVER.md](server/CONFIGURAZIONE_SERVER.md) - Setup Hardware e Server
 **Contenuto**:
 - 🛠️ Requisiti hardware completi
 - 🔧 Configurazione Raspberry Pi passo-passo
@@ -160,6 +175,7 @@ Architettura tecnica, flussi dati e guide per aggiungere funzionalità.
 cockpit/
 ├── README.md                          ← 📖 Documentazione principale
 ├── QUICK_START.md                     ← ⚡ Guida rapida
+├── HARDWARE.md                        ← 🛒 Lista completa hardware
 ├── DOCUMENTAZIONE.md                  ← 📚 Questo file (indice)
 ├── ARCHITETTURA.md                    ← 🏗️ Architettura tecnica
 │
@@ -190,11 +206,12 @@ cockpit/
 ---
 
 ### Path 2: Hardware Engineer
-1. [README.md](README.md) → Panoramica generale
-2. [server/CONFIGURAZIONE_SERVER.md](server/CONFIGURAZIONE_SERVER.md) → Setup completo hardware
-3. [ARCHITETTURA.md](ARCHITETTURA.md) → Flussi dati sensori
+1. [HARDWARE.md](HARDWARE.md) → Lista componenti da acquistare
+2. [README.md](README.md) → Panoramica generale
+3. [server/CONFIGURAZIONE_SERVER.md](server/CONFIGURAZIONE_SERVER.md) → Setup completo hardware
+4. [ARCHITETTURA.md](ARCHITETTURA.md) → Flussi dati sensori
 
-**Obiettivo**: Configurare Raspberry Pi, GPIO, sensori
+**Obiettivo**: Acquistare componenti, configurare Raspberry Pi, GPIO, sensori
 
 ---
 
@@ -241,6 +258,7 @@ cockpit/
 ### Hardware
 | Componente | Documentazione |
 |------------|----------------|
+| **Lista completa componenti** | **[HARDWARE.md](HARDWARE.md)** |
 | Raspberry Pi setup | [server/CONFIGURAZIONE_SERVER.md](server/CONFIGURAZIONE_SERVER.md) § Raspberry |
 | ELM327 OBD | [server/CONFIGURAZIONE_SERVER.md](server/CONFIGURAZIONE_SERVER.md) § Porta Seriale |
 | Optoaccoppiatori GPIO | [server/CONFIGURAZIONE_SERVER.md](server/CONFIGURAZIONE_SERVER.md) § GPIO |
@@ -340,16 +358,6 @@ const variabile = valore;
 
 ---
 
-## 👨‍💻 Autori
-
-PandaOS è sviluppato da:
-
-- **[Matteo Errera](https://github.com/matteoerrera)**
-- **[Roberto Zaccardi](https://github.com/rzaccardi)**
-- **[Ludovico Verde](https://www.instagram.com/ludovico.verdee/)** - Design & Creative Direction
-
----
-
 ## 🔄 Aggiornamenti Documentazione
 
 **Versione**: 0.9.0  
@@ -358,10 +366,12 @@ PandaOS è sviluppato da:
 ### Changelog
 - ✅ README principale completo
 - ✅ Quick Start Guide
+- ✅ Lista Hardware completa
 - ✅ Configurazione Client dettagliata
 - ✅ Configurazione Server e Hardware completa
 - ✅ Architettura e documentazione tecnica
 - ✅ Indice navigazione (questo file)
+- ✅ Template GitHub (issues, PR, contributing)
 
 
 

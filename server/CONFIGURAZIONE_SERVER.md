@@ -8,6 +8,8 @@ Guida completa alla configurazione hardware e software del server backend.
 
 ## 📋 Indice
 
+> 💡 **Devi acquistare componenti?** Consulta prima [HARDWARE.md](../HARDWARE.md) per la lista completa di tutto il necessario.
+
 1. [Requisiti Hardware](#-requisiti-hardware)
 2. [Configurazione Raspberry Pi](#-configurazione-raspberry-pi)
 3. [Porta Seriale OBD-II](#-porta-seriale-obd-ii)
@@ -1121,13 +1123,6 @@ sudo minicom -D /dev/ttyUSB0    # Monitor seriale
 journalctl -u obd-server -f     # Log server (se PM2/systemd)
 pm2 logs obd-server             # Log PM2
 ```
-
----
-
-## 📄 Licenza
-
-PandaOS è software libero rilasciato sotto **GNU General Public License v3.0 or later**.  
-Vedi [LICENSE](../LICENSE) per i dettagli completi.
 
 ---
 

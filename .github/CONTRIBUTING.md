@@ -347,16 +347,7 @@ Tutti i contributori sono riconosciuti nel file [AUTHORS](../AUTHORS).
 
 ---
 
-## 👨‍💻 Autori & Maintainer
+**Per informazioni su autori e maintainer, vedi [AUTHORS](../AUTHORS)**
 
-PandaOS è sviluppato e mantenuto da:
-
-- **[Matteo Errera](https://github.com/matteoerrera)** - Lead Developer & CTO @ Runder
-- **[Roberto Zaccardi](https://github.com/rzaccardi)** - Co-Developer & Co-Founder @ Magicitems
-- **[Ludovico Verde](https://www.instagram.com/ludovico.verdee/)** - Design & Creative Direction
-
----
-
-**Ultimo aggiornamento**: Novembre 2025  
-**Team**: Cyberpandino
+**Ultimo aggiornamento**: Novembre 2025
 
