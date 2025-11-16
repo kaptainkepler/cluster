@@ -1,0 +1,23 @@
+{
+  "name": "Cyberpandino Cluster",
+  "productName": "Cyberpandino Cluster",
+  "version": "0.9.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "install:all": "npm install && npm --prefix client install && npm --prefix server install && echo \"✅ Installazione completata con successo!\"",
+    "start": "concurrently \"npm run server\" \"npm run client\" \"npm run electron\"",
+    "client": "cd client && npm run dev",
+    "server": "node server/server.js",
+    "electron": "wait-on http://localhost:5173 && electron ."
+  },
+  "keywords": [],
+  "author": "Cyberpandino",
+  "license": "GPL-3.0-or-later",
+  "type": "commonjs",
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "electron": "^36.4.0",
+    "wait-on": "^8.0.3"
+  }
+}

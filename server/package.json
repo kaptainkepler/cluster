@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Cyberpandino",
+  "license": "GPL-3.0-or-later",
+  "description": "PandaOS Cluster - Server backend for OBD-II and GPIO communication",
+  "dependencies": {
+    "@serialport/parser-readline": "^13.0.0",
+    "ads1x15": "^1.1.1",
+    "child_process": "^1.0.2",
+    "dbus-next": "^0.10.2",
+    "dotenv": "^17.2.0",
+    "obd": "^1.0.0",
+    "obd-parser": "^0.3.0",
+    "onoff": "^6.0.3",
+    "serialport": "^13.0.0",
+    "socket.io": "^4.8.1"
+  }
+}
