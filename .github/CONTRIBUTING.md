@@ -415,11 +415,11 @@ Anche implementazioni parziali sono benvenute! Non serve completare tutta la fea
 
 Grazie a tutti i contributori che aiutano a rendere PandaOS migliore! 🚗💨
 
-Tutti i contributori sono riconosciuti nel file [AUTHORS](../AUTHORS).
+Tutti i contributori sono riconosciuti nel file [AUTHORS](../AUTHORS.md).
 
 ---
 
-**Per informazioni su autori e maintainer, vedi [AUTHORS](../AUTHORS)**
+**Per informazioni su autori e maintainer, vedi [AUTHORS](../AUTHORS.md)**
 
 **Ultimo aggiornamento**: Novembre 2025
 
