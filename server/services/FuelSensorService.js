@@ -145,7 +145,7 @@ class FuelSensorService {
 
   /**
    * Converte tensione in percentuale carburante
-   * Usa curve di calibrazione definita in config
+   * Usa curve di calibrazione definite in config
    */
   voltageToFuelPercent(voltage) {
     const { voltageEmpty, voltageFull } = this.config.calibration;

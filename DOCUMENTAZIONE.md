@@ -197,7 +197,7 @@ Feature future, wishlist e idee per contribuire al progetto.
 ## 🗂️ Organizzazione File
 
 ```
-cockpit/
+cluster/
 ├── README.md                          ← 📖 Documentazione principale
 ├── QUICK_START.md                     ← ⚡ Guida rapida
 ├── HARDWARE.md                        ← 🛒 Lista completa hardware

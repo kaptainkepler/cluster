@@ -110,7 +110,7 @@ cluster/
 
 - **Frontend**: React 18, TypeScript, Three.js, Socket.IO Client
 - **Backend**: Node.js, Socket.IO Server, SerialPort, GPIO (onoff)
-- **Desktop**: Electron 36
+- **Desktop**: Electron 26
 - **Hardware**: Raspberry Pi 4B, ELM327, DS18B20, ADS1115
 
 ### 🤔 Ma React + Electron su un Automotive?! Siete Pazzi?
@@ -682,7 +682,7 @@ Output in `client/dist/`
 
 ### Build Electron
 
-Per creare un'app distributable:
+Per creare un'app distribuibile:
 
 1. Installa electron-builder: `npm install --save-dev electron-builder`
 2. Aggiungi script in `package.json`:
@@ -700,7 +700,7 @@ Per creare un'app distributable:
 ## 📝 Struttura File Principali
 
 ```
-cockpit/
+cluster/
 ├── client/
 │   ├── src/
 │   │   ├── config/
