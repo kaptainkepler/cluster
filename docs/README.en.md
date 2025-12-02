@@ -1,4 +1,4 @@
-[🇬🇧 English](README.en.md) | [🇮🇹 Italiano](README.md) | [🇩🇪 Deutsch](README.de.md)
+[🇬🇧 English](README.en.md) | [🇮🇹 Italiano](../README.md) | [🇩🇪 Deutsch](README.de.md)
 
 ---
 
@@ -36,7 +36,7 @@ Complete digital instrument cluster system that replaces the original analog ins
 The digital cluster completely replaces the original analog instrument cluster with a modern and customizable interface.
 
 <div align="center">
-  <img src="docs/images/dashboard-main.png" alt="Main dashboard" width="800"/>
+  <img src="images/dashboard-main.png" alt="Main dashboard" width="800"/>
   <p><em>Main dashboard with interactive 3D model</em></p>
 </div>
 
@@ -69,7 +69,7 @@ Want to contribute? Every help is welcome! See the [contributing guide](.github/
 - **[General Documentation](DOCUMENTAZIONE.en.md)** - Complete project overview
 - **[Client Configuration](client/CONFIGURAZIONE.en.md)** - Frontend setup and configuration
 - **[Server Configuration](server/CONFIGURAZIONE_SERVER.en.md)** - Backend setup and configuration
-- **[Environment Configuration](client/src/config/README.en.md)** - Environment variables and parameters
+- **[Environment Configuration](client/config/README.en.md)** - Environment variables and parameters
 
 ### 🤝 Contribution
 - **[How to Contribute](.github/CONTRIBUTING.en.md)** - Complete guide to contributing to the project
@@ -77,7 +77,7 @@ Want to contribute? Every help is welcome! See the [contributing guide](.github/
 ### 📋 Other
 - **[Roadmap](ROADMAP.en.md)** - Development plan and wishlist
 - **[Authors](AUTHORS.en.md)** - Who contributed to the project
-- **[License](LICENSE)** - GNU General Public License v3.0
+- **[License](../LICENSE)** - GNU General Public License v3.0
 
 ---
 
@@ -765,7 +765,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 ```
 
-The full license text is available in the [LICENSE](LICENSE) file and at https://www.gnu.org/licenses/gpl-3.0.html
+The full license text is available in the [LICENSE](../LICENSE) file and at https://www.gnu.org/licenses/gpl-3.0.html
 
 ---
 

@@ -1,4 +1,4 @@
-[🇬🇧 English](README.en.md) | [🇮🇹 Italiano](README.md) | [🇩🇪 Deutsch](README.de.md)
+[🇬🇧 English](README.en.md) | [🇮🇹 Italiano](../README.md) | [🇩🇪 Deutsch](README.de.md)
 
 ---
 
@@ -36,7 +36,7 @@ Vollständiges digitales Armaturenbrett-System, das die originale analoge Instru
 Das digitale Cluster ersetzt das ursprüngliche analoge Armaturenbrett vollständig durch eine moderne und anpassbare Benutzeroberfläche.
 
 <div align="center">
-  <img src="docs/images/dashboard-main.png" alt="Haupt-Dashboard" width="800"/>
+  <img src="images/dashboard-main.png" alt="Haupt-Dashboard" width="800"/>
   <p><em>Haupt-Dashboard mit interaktivem 3D-Modell</em></p>
 </div>
 
@@ -69,7 +69,7 @@ Möchten Sie beitragen? Jede Hilfe ist willkommen! Siehe die [Anleitung zum Beit
 - **[Allgemeine Dokumentation](DOCUMENTAZIONE.de.md)** - Vollständiger Projektüberblick
 - **[Client-Konfiguration](client/CONFIGURAZIONE.de.md)** - Frontend-Setup und Konfiguration
 - **[Server-Konfiguration](server/CONFIGURAZIONE_SERVER.de.md)** - Backend-Setup und Konfiguration
-- **[Environment-Konfiguration](client/src/config/README.de.md)** - Umgebungsvariablen und Parameter
+- **[Environment-Konfiguration](client/config/README.de.md)** - Umgebungsvariablen und Parameter
 
 ### 🤝 Beitragen
 - **[Wie man beiträgt](.github/CONTRIBUTING.de.md)** - Vollständiger Leitfaden zum Beitragen zum Projekt
@@ -77,7 +77,7 @@ Möchten Sie beitragen? Jede Hilfe ist willkommen! Siehe die [Anleitung zum Beit
 ### 📋 Sonstiges
 - **[Roadmap](ROADMAP.de.md)** - Entwicklungsplan und Wunschliste
 - **[Autoren](AUTHORS.de.md)** - Wer zum Projekt beigetragen hat
-- **[Lizenz](LICENSE)** - GNU General Public License v3.0
+- **[Lizenz](../LICENSE)** - GNU General Public License v3.0
 
 ---
 
@@ -765,7 +765,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 ```
 
-Der vollständige Lizenztext ist in der Datei [LICENSE](LICENSE) und unter https://www.gnu.org/licenses/gpl-3.0.html verfügbar
+Der vollständige Lizenztext ist in der Datei [LICENSE](../LICENSE) und unter https://www.gnu.org/licenses/gpl-3.0.html verfügbar
 
 ---
 
