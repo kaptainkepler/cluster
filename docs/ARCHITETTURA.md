@@ -6,7 +6,7 @@
 
 Documentazione tecnica dell'architettura del sistema.
 
-> 💡 **Nota sullo Stack**: Sì, usiamo JavaScript su un'auto. Sì, sappiamo che è folle. No, non ci pentiamo. Vedi [README - Ma React + Electron su un Automotive?!](README.md#-ma-react--electron-su-un-automotive-siete-pazzi) per la giustificazione completa.
+> 💡 **Nota sullo Stack**: Sì, usiamo JavaScript su un'auto. Sì, sappiamo che è folle. No, non ci pentiamo. Vedi [README - Ma React + Electron su un Automotive?!](../README.md#-ma-react--electron-su-un-automotive-siete-pazzi) per la giustificazione completa.
 
 ---
 
