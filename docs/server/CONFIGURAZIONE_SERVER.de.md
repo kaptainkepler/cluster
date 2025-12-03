@@ -1,28 +1,18 @@
-[🇬🇧 English](CONFIGURAZIONE_SERVER.en.md) |
-[🇮🇹 Italiano](CONFIGURAZIONE_SERVER.md) |
-[🇩🇪 Deutsch](CONFIGURAZIONE_SERVER.de.md)
+[🇬🇧 English](CONFIGURAZIONE_SERVER.en.md) | [🇮🇹 Italiano](CONFIGURAZIONE_SERVER.md) | [🇩🇪 Deutsch](CONFIGURAZIONE_SERVER.de.md)
 
 ---
 
 # 🔧 Server-Konfiguration - PandaOS Cluster
 
-Vollständiger Leitfaden zur Hardware- und Software-Konfiguration des
-Backend-Servers.
+Vollständiger Leitfaden zur Hardware- und Software-Konfiguration des Backend-Servers.
 
-> ⚠️ **WARNUNG**: Dieser Leitfaden beschreibt elektrische Verbindungen und
-> Hardware-Modifikationen. Jeder Eingriff in Fahrzeugelektrik birgt Risiken.
-> Lesen Sie den [vollständigen Haftungsausschluss](../README.md#️-disclaimer)
-> und fahren Sie nur fort, wenn Sie wissen, was Sie tun. Die Autoren übernehmen
-> keine Verantwortung für Schäden, die aus der Nutzung dieser Informationen
-> entstehen.
+> ⚠️ **WARNUNG**: Dieser Leitfaden beschreibt elektrische Verbindungen und Hardware-Modifikationen. Jeder Eingriff in Fahrzeugelektrik birgt Risiken. Lesen Sie den [vollständigen Haftungsausschluss](../README.md#️-disclaimer) und fahren Sie nur fort, wenn Sie wissen, was Sie tun. Die Autoren übernehmen keine Verantwortung für Schäden, die aus der Nutzung dieser Informationen entstehen.
 
 ---
 
 ## 📋 Inhaltsverzeichnis
 
-> 💡 **Müssen Sie Komponenten kaufen?** Konsultieren Sie zuerst
-> [HARDWARE.md](../HARDWARE.md) für die vollständige Liste aller benötigten
-> Teile.
+> 💡 **Müssen Sie Komponenten kaufen?** Konsultieren Sie zuerst [HARDWARE.md](../HARDWARE.md) für die vollständige Liste aller benötigten Teile.
 
 1. [Hardware-Anforderungen](#-hardware-anforderungen)
 2. [Raspberry Pi-Konfiguration](#-raspberry-pi-konfiguration)
@@ -39,21 +29,21 @@ Backend-Servers.
 
 ### Wesentliche Komponenten
 
-| Komponente      | Modell                 | Zweck                                  |
-| --------------- | ---------------------- | -------------------------------------- |
-| **SBC**         | Raspberry Pi 4B (4GB+) | Hauptverarbeitung                      |
-| **OBD-Adapter** | ELM327 USB             | ECU-Kommunikation                      |
-| **Optokoppler** | PC817 oder ähnlich     | Elektrische Isolation für Warnleuchten |
-| **Netzteil**    | 5V 3A USB-C            | Raspberry-Stromversorgung              |
-| **Display**     | HDMI 1920x480+         | Cluster-Anzeige                        |
+| Komponente | Modell | Zweck |
+|------------|--------|-------|
+| **SBC** | Raspberry Pi 4B (4GB+) | Hauptverarbeitung |
+| **OBD-Adapter** | ELM327 USB | ECU-Kommunikation |
+| **Optokoppler** | PC817 oder ähnlich | Elektrische Isolation für Warnleuchten |
+| **Netzteil** | 5V 3A USB-C | Raspberry-Stromversorgung |
+| **Display** | HDMI 1920x480+ | Cluster-Anzeige |
 
 ### Optionale Komponenten
 
-| Komponente           | Modell             | Zweck                      |
-| -------------------- | ------------------ | -------------------------- |
-| **Temperatursensor** | DS18B20            | Außentemperatur            |
-| **ADC**              | ADS1115            | Kraftstoffsensor-Auslesung |
-| **Widerstände**      | 4.7kΩ, 100kΩ, 33kΩ | Pull-up und Teiler         |
+| Komponente | Modell | Zweck |
+|------------|--------|-------|
+| **Temperatursensor** | DS18B20 | Außentemperatur |
+| **ADC** | ADS1115 | Kraftstoffsensor-Auslesung |
+| **Widerstände** | 4.7kΩ, 100kΩ, 33kΩ | Pull-up und Teiler |
 
 ---
 
@@ -63,18 +53,14 @@ Backend-Servers.
 
 #### OS-Auswahl
 
-**TL;DR**: Raspberry Pi OS Lite (64-bit) Debian-basiert, von unnötigen Diensten
-befreit.
+**TL;DR**: Raspberry Pi OS Lite (64-bit) Debian-basiert, von unnötigen Diensten befreit.
 
 **Empfohlene Distribution**: Raspberry Pi OS Lite (64-bit)
-
-- **Download**:
-  [raspberrypi.com/software](https://www.raspberrypi.com/software/)
+- **Download**: [raspberrypi.com/software](https://www.raspberrypi.com/software/)
 - **Version**: Bookworm (Debian 12) oder neuer
 - **Architektur**: 64-bit (bessere Performance für Node.js/Electron)
 
 **Warum Lite statt Desktop?**
-
 - ✅ Bootzeit ~30 Sekunden (vs ~60s mit Desktop)
 - ✅ Freier RAM: ~200MB (vs ~500MB mit Desktop-Umgebung)
 - ✅ Keine unnötigen Hintergrunddienste
@@ -82,26 +68,19 @@ befreit.
 - ❌ Komplexer zu konfigurieren (keine GUI, alles via SSH)
 
 **Getestete Alternativen**:
-
-- **Raspberry Pi OS Desktop**: Funktioniert, aber langsamer Boot (~60s) und
-  RAM-Verschwendung
-- **DietPi**: Ausgezeichnet für ultra-schnellen Boot (~15-20s), aber erfordert
-  mehr manuelle Konfiguration
+- **Raspberry Pi OS Desktop**: Funktioniert, aber langsamer Boot (~60s) und RAM-Verschwendung
+- **DietPi**: Ausgezeichnet für ultra-schnellen Boot (~15-20s), aber erfordert mehr manuelle Konfiguration
 
 #### Bootzeit: Die Realität
 
-Nach verschiedenen Tests, mit **abgespecktem Raspberry Pi OS Lite** erreichten
-wir:
+Nach verschiedenen Tests, mit **abgespecktem Raspberry Pi OS Lite** erreichten wir:
 
 - **~30 Sekunden** vollständiger Boot (POST → Login → PandaOS betriebsbereit)
-- **~20 Sekunden** wenn Sie nicht-essentielle Dienste deaktivieren (siehe
-  Optimierungen unten)
+- **~20 Sekunden** wenn Sie nicht-essentielle Dienste deaktivieren (siehe Optimierungen unten)
 
 **Ist das zu viel?** Kommt darauf an:
-
 - ❌ Wenn Sie die Zündung häufig ein-/ausschalten: ja, Warten ist nervig
-- ✅ Wenn Sie **immer-an-Standby-Modus** verwenden (was wir benutzt haben): kein
-  Problem.
+- ✅ Wenn Sie **immer-an-Standby-Modus** verwenden (was wir benutzt haben): kein Problem.
 
 #### Immer-An-Standby-Ansatz:
 
@@ -117,20 +96,17 @@ wir:
    - System **sofort betriebsbereit** (0 Sekunden Boot!)
 
 **Vorteile**:
-
 - ⚡ Cluster sofort bei Zündung verfügbar
 - 🔋 Sehr niedriger Standby-Verbrauch (~30mA @ 12V)
 - 🛡️ SD-Karte geschützt (keine abrupten Shutdowns)
 - 🕐 Bootzeit wird irrelevant
 
 **Tatsächlich gemessener Verbrauch**:
-
 - **Standby** (Display aus, CPU Leerlauf): ~0.3-0.5W
 - **Betrieb** (Display an, OBD-Daten): ~6-8W
 - **Batterie-Auswirkung**: Vernachlässigbar (<0.01% Ladung/Tag)
 
-⚠️ **Hinweis**: Wenn Sie das Auto >2 Wochen stehen lassen, erwägen Sie einen
-manuellen Schalter oder automatisches Herunterfahren nach 7 Tagen Inaktivität.
+⚠️ **Hinweis**: Wenn Sie das Auto >2 Wochen stehen lassen, erwägen Sie einen manuellen Schalter oder automatisches Herunterfahren nach 7 Tagen Inaktivität.
 
 #### Basis-Installation
 
@@ -151,9 +127,7 @@ manuellen Schalter oder automatisches Herunterfahren nach 7 Tagen Inaktivität.
 
 #### Boot-Zeit-Optimierungen (Fortgeschritten)
 
-> 💡 **Hinweis**: Dieser Abschnitt ist für diejenigen, die den
-> schnellstmöglichen Boot wollen. Wenn Sie **immer-an-Standby** verwenden,
-> können Sie ihn sicher überspringen.
+> 💡 **Hinweis**: Dieser Abschnitt ist für diejenigen, die den schnellstmöglichen Boot wollen. Wenn Sie **immer-an-Standby** verwenden, können Sie ihn sicher überspringen.
 
 Mit diesen Anpassungen können Sie von 30s auf ~15-20s reduzieren:
 
@@ -182,12 +156,12 @@ systemd-analyze blame  # Zeigt langsamste Dienste
 
 **2. Kernel-Boot optimieren**
 
-`/boot/firmware/cmdline.txt` bearbeiten:
+`/boot/cmdline.txt` bearbeiten:
 
 ```bash
-sudo nano /boot/firmware/cmdline.txt
+sudo nano /boot/cmdline.txt
 
-# Am Ende der Zeile hinzufügen (alles in EINER Zeile):
+# Am Ende der Zeile hinzufügen (alles auf EINER Zeile):
 quiet splash fastboot noatime nodiratime
 ```
 
@@ -216,7 +190,6 @@ DefaultTimeoutStopSec=5s
 PM2 + systemd für parallelen Start (siehe § PM2-Konfiguration in README.md).
 
 **Erwartete Ergebnisse**:
-
 - **OS-Boot**: ~8-12 Sekunden
 - **Dienste-Start**: ~5-8 Sekunden
 - **Gesamt**: ~15-20 Sekunden (vs 30s original)
@@ -228,28 +201,23 @@ PM2 + systemd für parallelen Start (siehe § PM2-Konfiguration in README.md).
 Für diejenigen, die mit <10 Sekunden Boot experimentieren möchten:
 
 **Zu testende Ansätze**:
-
 - **Custom Init**: Systemd durch leichteres Init ersetzen (runit, OpenRC)
-- **Minimaler Kernel**: Custom Linux-Kernel mit nur notwendigen Treibern
-  kompilieren
+- **Minimaler Kernel**: Custom Linux-Kernel mit nur notwendigen Treibern kompilieren
 - **Read-only Root**: Root-Dateisystem im Read-only-Modus (schneller, stabiler)
 - **Optimiertes Initramfs**: Beim Boot geladene Dienste reduzieren
 
 **Roadmap**:
-
 1. Schritt-für-Schritt "Debian minimal"-Prozedur dokumentieren
 2. Automatisches Skript für Boot-Optimierungen
 3. Vorkonfiguriertes herunterladbares SD-Image
 
-Falls Sie Erfahrung mit eingebettetem Linux haben und beitragen möchten, öffnen
-Sie ein [Issue](https://github.com/cyberpandino/cluster/issues)!
+Falls Sie Erfahrung mit eingebettetem Linux haben und beitragen möchten, öffnen Sie ein [Issue](https://github.com/cyberpandino/cluster/issues)!
 
 ---
 
 ### 2. Node.js und npm-Installation
 
-⚠️ **Wichtig**: `apt install nodejs` installiert eine veraltete Version
-(v12-14). PandaOS benötigt **Node.js 18+**.
+⚠️ **Wichtig**: `apt install nodejs` installiert eine veraltete Version (v12-14). PandaOS benötigt **Node.js 18+**.
 
 **Empfohlene Methode: NodeSource**
 
@@ -280,8 +248,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install -y git build-essential python3
 ```
 
-`build-essential` ist notwendig zum Kompilieren nativer Module (SerialPort,
-onoff, i2c-bus).
+`build-essential` ist notwendig zum Kompilieren nativer Module (SerialPort, onoff, i2c-bus).
 
 **Überprüfung**
 
@@ -300,15 +267,13 @@ sudo raspi-config
 ```
 
 Aktivieren:
-
 - **Interface Options** → **I2C** → Yes (für ADS1115)
-- **Interface Options** → **Serial Port** →
+- **Interface Options** → **Serial Port** → 
   - "Would you like a login shell...?" → **No**
   - "Would you like the serial port hardware...?" → **Yes**
 - **Interface Options** → **1-Wire** → Yes (für DS18B20)
 
 Neustart:
-
 ```bash
 sudo reboot
 ```
@@ -349,13 +314,11 @@ ls -l /dev/1-wire*
 #### 1. ELM327-Adapter
 
 **Erforderliche Spezifikationen**:
-
 - Protokoll: OBD-II (ISO 9141-2, ISO 14230-4)
 - Verbindung: USB (FTDI oder CH340)
 - Kompatibilität: ELM327 v1.5 oder höher
 
 **Verbindung**:
-
 1. ELM327 an Magneti Marelli IAW 4AF-Diagnosestecker anschließen
 2. ELM327 via USB an Raspberry Pi anschließen
 3. LED am ELM327 leuchtet überprüfen
@@ -409,13 +372,13 @@ Falls ELM327 an anderem Port erkannt wird:
 
 ```javascript
 // Alternativer USB-Port
-this.portPath = "/dev/ttyUSB1";
+this.portPath = '/dev/ttyUSB1';
 
 // GPIO UART (falls direkt verkabelt)
-this.portPath = "/dev/ttyAMA0";
+this.portPath = '/dev/ttyAMA0';
 
 // CH340-Adapter (einige Klone)
-this.portPath = "/dev/ttyACM0";
+this.portPath = '/dev/ttyACM0';
 ```
 
 #### Alternative Baudraten
@@ -431,9 +394,7 @@ this.baudRate = 9600;
 
 ### OBD-Protokoll
 
-Der Server unterstützt automatisch Fiat Panda 141 / Magneti Marelli IAW
-4AF-Protokolle:
-
+Der Server unterstützt automatisch Fiat Panda 141 / Magneti Marelli IAW 4AF-Protokolle:
 - **ISO 9141-2** (K-Line)
 - **ISO 14230-4** (KWP2000)
 
@@ -447,22 +408,20 @@ Der Befehl `ATSP0` setzt Auto-Erkennung des Protokolls.
 
 **Pfad**: `server/config/gpio-mapping.js`
 
-Diese Datei enthält die gesamte GPIO-Zuordnung für Warnleuchten, Sensoren und
-Zündung.
+Diese Datei enthält die gesamte GPIO-Zuordnung für Warnleuchten, Sensoren und Zündung.
 
 ### Optokoppler-Schaltplan
 
 ```
-              RASPBERRY PI
-              +------------+
-12V Leuchte ->|PC817   GPIO|----> Software-Auslesung
-              |            |
-        GND-->|GND         |
-              +------------+
+                  RASPBERRY PI
+                  +------------+
+    12V Leuchte ->|PC817   GPIO|----> Software-Auslesung
+                  |            |
+            GND-->|GND         |
+                  +------------+
 ```
 
 **Logik**:
-
 - Leuchte **AN** (12V) → Optokoppler AN → GPIO **HIGH** (1)
 - Leuchte **AUS** (0V) → Optokoppler AUS → GPIO **LOW** (0)
 
@@ -480,7 +439,6 @@ config: {
 ```
 
 **Parameter-Erklärung**:
-
 - **mode**: `'BCM'` verwendet GPIO-Nummerierung, nicht physische Pin-Nummern
 - **pullMode**: `'PUD_DOWN'` stellt 0V sicher wenn Optokoppler offen
 - **debounceTime**: Filtert Störsignale (z.B. LED-Flackern)
@@ -488,28 +446,28 @@ config: {
 
 #### GPIO-Pin-Tabelle
 
-| Leuchte/Funktion            | GPIO (BCM) | Physischer Pin | Beschreibung               |
-| --------------------------- | ---------- | -------------- | -------------------------- |
-| **Beleuchtung**             |            |                |                            |
-| Fernlicht                   | 5          | 29             | Fernlichtscheinwerfer      |
-| Abblendlicht                | 6          | 31             | Abblendlichtscheinwerfer   |
-| Nebelschlussleuchte         | 13         | 33             | Nebelschlussleuchte hinten |
-| **Fahrtrichtungsanzeiger**  |            |                |                            |
-| Blinker                     | 17         | 11             | Fahrtrichtungsanzeiger     |
-| Warnblinker                 | 12         | 32             | Warnblinkanlage            |
-| **Motorsystem**             |            |                |                            |
-| Kühlmitteltemp              | 16         | 36             | Kühlmitteltemperatur       |
-| Öldruck                     | 22         | 15             | Motoröldruck               |
-| Einspritzung                | 24         | 18             | Einspritzsystem            |
-| **Elektrisches System**     |            |                |                            |
-| Lichtmaschine/Batterie      | 27         | 13             | Batterieladung             |
-| Schlüssel eingesteckt (KEY) | 25         | 22             | Zündung an                 |
-| **Andere Systeme**          |            |                |                            |
-| Bremssystem                 | 23         | 16             | Bremsen                    |
-| Heckscheibenheizung         | 19         | 35             | Defroster                  |
-| Kraftstoffreserve           | 20         | 38             | Niedriger Stand            |
-| **Power-Management**        |            |                |                            |
-| Zündung (Armaturenbrett)    | 21         | 40             | Zündung AN/AUS erkennen    |
+| Leuchte/Funktion | GPIO (BCM) | Physischer Pin | Beschreibung |
+|------------------|------------|----------------|--------------|
+| **Beleuchtung** |
+| Fernlicht | 5 | 29 | Fernlichtscheinwerfer |
+| Abblendlicht | 6 | 31 | Abblendlichtscheinwerfer |
+| Nebelschlussleuchte | 13 | 33 | Nebelschlussleuchte hinten |
+| **Fahrtrichtungsanzeiger** |
+| Blinker | 17 | 11 | Fahrtrichtungsanzeiger |
+| Warnblinker | 12 | 32 | Warnblinkanlage |
+| **Motorsystem** |
+| Kühlmitteltemp | 16 | 36 | Kühlmitteltemperatur |
+| Öldruck | 22 | 15 | Motoröldruck |
+| Einspritzung | 24 | 18 | Einspritzsystem |
+| **Elektrisches System** |
+| Lichtmaschine/Batterie | 27 | 13 | Batterieladung |
+| Schlüssel eingesteckt (KEY) | 25 | 22 | Zündung an |
+| **Andere Systeme** |
+| Bremssystem | 23 | 16 | Bremsen |
+| Heckscheibenheizung | 19 | 35 | Defroster |
+| Kraftstoffreserve | 20 | 38 | Niedriger Stand |
+| **Power-Management** |
+| Zündung (Armaturenbrett) | 21 | 40 | Zündung AN/AUS erkennen |
 
 ### Raspberry Pi 4B Pinout-Diagramm
 
@@ -573,36 +531,31 @@ highBeam: {
 
 ### Optokoppler-Verkabelung
 
-> 📘 **WICHTIG**: Bevor Sie Optokoppler anschließen, konsultieren Sie den
-> [Offiziellen Fiat Panda 141 Schaltplan](http://www.bunkeringegnere.altervista.org/esplosi/FIAT%20PANDA/panda%20141/1100%20mpi/55%20IMPIANTO%20ELETTRICO%20-%20SCHEMI%20-%20GAMMA%202000.pdf),
-> um die korrekten Kabel mit Farbcodes zu identifizieren (z.B. R=Rot,
-> BN=Weiß-Schwarz, GV=Gelb-Grün).
+> 📘 **WICHTIG**: Bevor Sie Optokoppler anschließen, konsultieren Sie den [Offiziellen Fiat Panda 141 Schaltplan](http://www.bunkeringegnere.altervista.org/esplosi/FIAT%20PANDA/panda%20141/1100%20mpi/55%20IMPIANTO%20ELETTRICO%20-%20SCHEMI%20-%20GAMMA%202000.pdf), um die korrekten Kabel mit Farbcodes zu identifizieren (z.B. R=Rot, BN=Weiß-Schwarz, GV=Gelb-Grün).
 
 #### Einzel-Optokoppler-Schaltplan (PC817)
 
 ```
-    Fahrzeug (Eingangsseite)      |  Raspberry Pi (Ausgangsseite)
-                                  |
-+12V (von Leuchte) --[R 1kΩ]--+  |
-                               |  |
-                        LED+ (1)  |
-                                  |
-                        LED- (2)--|--- Gemeinsames GND
-                                  |
-                             (3)--|--- GPIO (z.B. GPIO 5)
-                                  |
-                             (4)--|--- GND
+        Fahrzeug (Eingangsseite)      |  Raspberry Pi (Ausgangsseite)
+                                      |
+    +12V (von Leuchte) --[R 1kΩ]--+  |
+                                   |  |
+                            LED+ (1)  |
+                                      |
+                            LED- (2)--|--- Gemeinsames GND
+                                      |
+                                 (3)--|--- GPIO (z.B. GPIO 5)
+                                      |
+                                 (4)--|--- GND
 ```
 
 **Komponenten**:
-
 - **R**: LED-Strombegrenzungswiderstand (1kΩ - 2.2kΩ)
 - **PC817**: Standard-Optokoppler
 - **Pin 1-2**: Interne LED (Fahrzeugseite)
 - **Pin 3-4**: Ausgangstransistor (Raspberry-Seite)
 
 **Wie Kabel identifizieren**:
-
 1. Offiziellen Schaltplan konsultieren (Link oben)
 2. Instrumententafel finden (Seite "Instrumententafel-Anschluss")
 3. Gewünschte Leuchte identifizieren (z.B. Fernlicht, Blinker, etc.)
@@ -628,7 +581,6 @@ Leuchte 2 (12V) --[1kΩ]--+
 ```
 
 **Hinweise**:
-
 - Gemeinsames GND für alle Optokoppler verwenden
 - Jede Leuchte hat ihren eigenen dedizierten Optokoppler
 - Widerstände in Reihe zum Schutz der internen LED
@@ -677,7 +629,6 @@ finally:
 ```
 
 Als `test_gpio.py` speichern und ausführen:
-
 ```bash
 python3 test_gpio.py
 ```
@@ -710,7 +661,6 @@ Pin 3 (VDD)    ---------------- 3.3V (Pin 1, 17)
 ```
 
 **Komponenten**:
-
 - **Pull-up-Widerstand**: 4.7kΩ zwischen DATA und 3.3V (essentiell!)
 - **Kabel**: Empfohlene Maximallänge 3 Meter
 
@@ -786,7 +736,7 @@ temperature: {
 #### Parameter
 
 - **enabled**: `false` deaktiviert Sensor vollständig
-- **sensorId**:
+- **sensorId**: 
   - `null` → ersten DS18B20 automatisch erkennen
   - `'28-xxxxxxxxxxxx'` → spezifische ID erzwingen (Multi-Sensoren)
 - **readInterval**: Lesefrequenz in Millisekunden (min 1000)
@@ -804,8 +754,7 @@ temperature: {
 }
 ```
 
-Und duplizierten Service für zweiten Sensor erstellen durch Änderung von
-`TemperatureSensorService.js`.
+Und duplizierten Service für zweiten Sensor erstellen durch Änderung von `TemperatureSensorService.js`.
 
 ### Fehlerbehebung
 
@@ -838,7 +787,6 @@ sudo modprobe w1-therm
 ```
 
 **Lösungen**:
-
 1. 4.7kΩ-Widerstand vorhanden überprüfen
 2. Kabel verkürzen
 3. Abgeschirmtes Kabel verwenden
@@ -894,13 +842,11 @@ Ausgangsspannung = Vin × (R2 / (R1 + R2))
 ```
 
 **Warum benötigt**:
-
 - Original-Kraftstoffsensor variiert 0-12V
 - ADS1115 akzeptiert max ±4.096V (Verstärkung 4096)
 - Teiler reduziert 12V → ~3V
 
 **Individuelle Berechnung**:
-
 ```
 R2 / (R1 + R2) = Vout_max / Vin_max
 
@@ -1012,16 +958,15 @@ fuel: {
 #### Verstärkungsparameter
 
 | gain | Bereich | Auflösung (16-bit) |
-| ---- | ------- | ------------------ |
-| 256  | ±0.256V | 7.8 µV             |
-| 512  | ±0.512V | 15.6 µV            |
-| 1024 | ±1.024V | 31.2 µV            |
-| 2048 | ±2.048V | 62.5 µV            |
-| 4096 | ±4.096V | 125 µV             |
-| 6144 | ±6.144V | 187.5 µV           |
+|------|---------|-------------------|
+| 256 | ±0.256V | 7.8 µV |
+| 512 | ±0.512V | 15.6 µV |
+| 1024 | ±1.024V | 31.2 µV |
+| 2048 | ±2.048V | 62.5 µV |
+| 4096 | ±4.096V | 125 µV |
+| 6144 | ±6.144V | 187.5 µV |
 
 **Verstärkungswahl**:
-
 - Niedrigste Verstärkung verwenden, die Ihren Bereich enthält
 - Für Sensor 0-3V (mit Teiler): `gain: 4096`
 - Falls max. Spannung <2V: `gain: 2048` (mehr Auflösung)
@@ -1032,7 +977,7 @@ Kalibrierung bildet ADC-Spannung → Kraftstoffprozent (0-100%) ab.
 
 **Prozedur**:
 
-1. **Leerer Tank**:
+1. **Leerer Tank**: 
    - Zündung bei leerem Tank einschalten
    - Spannung in Debug-Konsole ablesen
    - `voltageEmpty` setzen
@@ -1044,7 +989,6 @@ Kalibrierung bildet ADC-Spannung → Kraftstoffprozent (0-100%) ab.
    - `voltageFull` setzen
 
 **Beispiel**:
-
 ```javascript
 calibration: {
   voltageEmpty: 0.8,   // Gemessen: 0.8V bei leerem Tank
@@ -1053,18 +997,17 @@ calibration: {
 ```
 
 System berechnet linear:
-
 ```
 prozent = ((V_gemessen - V_leer) / (V_voll - V_leer)) × 100
 ```
 
 #### Sample-Rate
 
-| SPS     | Verwendung                            |
-| ------- | ------------------------------------- |
-| 8       | Maximale Präzision, langsam           |
-| 16-64   | Ausgewogen                            |
-| 128-250 | Standard (empfohlen)                  |
+| SPS | Verwendung |
+|-----|------------|
+| 8 | Maximale Präzision, langsam |
+| 16-64 | Ausgewogen |
+| 128-250 | Standard (empfohlen) |
 | 475-860 | Hohe Geschwindigkeit, weniger präzise |
 
 **Empfehlung**: 250 SPS ist ideal für Kraftstoffsensor (ändert sich langsam).
@@ -1092,13 +1035,11 @@ sudo i2cdetect -y 1
 #### Liest immer 0V oder festen Wert
 
 **Ursachen**:
-
 1. A0 nicht verbunden → liest 0V
 2. Falscher Kanal in Konfiguration
 3. Verstärkung zu niedrig (Signal sättigt)
 
 **Lösungen**:
-
 ```javascript
 // Korrekten Kanal überprüfen
 channel: 0,  // 0=A0, 1=A1, 2=A2, 3=A3
@@ -1119,9 +1060,7 @@ gain: 6144,  // Falls Signal >4.096V
 
 ### Zweck
 
-System erkennt, wann Fahrzeugzündung ein-/ausgeschaltet wird und führt
-automatische Aktionen aus:
-
+System erkennt, wann Fahrzeugzündung ein-/ausgeschaltet wird und führt automatische Aktionen aus:
 - **Zündung aus** → `low-power.sh`-Skript ausführen (Stromsparen)
 - **Zündung an** → `wake.sh`-Skript ausführen (Reaktivierung)
 
@@ -1129,8 +1068,7 @@ automatische Aktionen aus:
 
 #### Verbindung
 
-Dedizierten Optokoppler an "Schlüssel eingesteckt"-Signal anschließen (12V wenn
-Zündung an):
+Dedizierten Optokoppler an "Schlüssel eingesteckt"-Signal anschließen (12V wenn Zündung an):
 
 ```
 Zündung 12V (KEY) --[1kΩ]--+
@@ -1141,7 +1079,6 @@ Zündung 12V (KEY) --[1kΩ]--+
 ```
 
 **Logik**:
-
 - Zündung **an** (12V) → GPIO 21 **HIGH**
 - Zündung **aus** (0V) → GPIO 21 **LOW**
 
@@ -1200,7 +1137,6 @@ logger "PandaOS: Stromsparmodus aktiviert"
 ```
 
 Ausführbar machen:
-
 ```bash
 chmod +x server/scripts/low-power.sh
 ```
@@ -1228,7 +1164,6 @@ logger "PandaOS: System reaktiviert"
 ```
 
 Ausführbar machen:
-
 ```bash
 chmod +x server/scripts/wake.sh
 ```
@@ -1240,7 +1175,6 @@ Skripte können beliebige Bash-Befehle ausführen, zum Beispiel:
 #### Auto-Shutdown nach 10 Minuten
 
 In `low-power.sh`:
-
 ```bash
 # Herunterfahren falls Zündung 10 Minuten aus bleibt
 (sleep 600 && sudo shutdown -h now) &
@@ -1248,7 +1182,6 @@ echo $! > /tmp/pandaos-shutdown.pid
 ```
 
 In `wake.sh`:
-
 ```bash
 # Shutdown abbrechen falls Zündung wieder eingeschaltet wird
 if [ -f /tmp/pandaos-shutdown.pid ]; then
@@ -1281,8 +1214,7 @@ Nicht unterstützte Plattform: linux x64 - benötigt Linux ARM
 
 **Ursache**: Läuft auf Nicht-Raspberry-Pi-System
 
-**Lösung**: Server nur auf Raspberry Pi ausführen, oder Prüfung in
-`OBDServer.js` deaktivieren (nicht empfohlen)
+**Lösung**: Server nur auf Raspberry Pi ausführen, oder Prüfung in `OBDServer.js` deaktivieren (nicht empfohlen)
 
 #### Fehler: "GPIO-Modul nicht verfügbar"
 
@@ -1293,7 +1225,6 @@ GPIO-Modul (onoff) nicht verfügbar
 **Ursache**: `onoff`-Bibliothek nicht installiert oder inkompatibles System
 
 **Lösung**:
-
 ```bash
 cd server
 npm install onoff
@@ -1304,7 +1235,6 @@ npm install onoff
 #### Symptom: "Port /dev/ttyUSB0 nicht gefunden"
 
 **Lösung**:
-
 1. ELM327 verbunden überprüfen: `lsusb`
 2. Port überprüfen: `ls -l /dev/ttyUSB*`
 3. Berechtigungen prüfen: `groups` (muss `dialout` enthalten)
@@ -1314,7 +1244,6 @@ npm install onoff
 **Ursache**: ELM327 kommuniziert nicht
 
 **Lösung**:
-
 1. Baudrate in `OBDCommunicationService.js` überprüfen
 2. Mit minicom testen: `minicom -D /dev/ttyUSB0 -b 38400`
 3. Reset versuchen: ELM327 trennen, 10 Sekunden warten, wieder verbinden
@@ -1324,7 +1253,6 @@ npm install onoff
 #### Symptom: Leuchten nicht erkannt
 
 **Diagnose**:
-
 ```bash
 # Manueller GPIO-Test
 gpio -g mode 17 in
@@ -1334,7 +1262,6 @@ gpio -g read 17
 ```
 
 **Lösungen**:
-
 1. Optokoppler-Verkabelung überprüfen
 2. Mit LED und Widerstand statt Optokoppler testen
 3. Pin-Nummer in `gpio-mapping.js` prüfen (BCM vs. physisch)
@@ -1377,10 +1304,8 @@ sudo i2cdetect -y 1
 - **DS18B20**: https://datasheets.maximintegrated.com/en/ds/DS18B20.pdf
 - **ADS1115**: https://www.ti.com/lit/ds/symlink/ads1115.pdf
 - **PC817 Optokoppler**: https://www.farnell.com/datasheets/73758.pdf
-- **ELM327**:
-  https://www.elmelectronics.com/wp-content/uploads/2017/01/ELM327DS.pdf
-- **Fiat Panda 141 - Offizieller Schaltplan**:
-  http://www.bunkeringegnere.altervista.org/esplosi/FIAT%20PANDA/panda%20141/1100%20mpi/55%20IMPIANTO%20ELETTRICO%20-%20SCHEMI%20-%20GAMMA%202000.pdf
+- **ELM327**: https://www.elmelectronics.com/wp-content/uploads/2017/01/ELM327DS.pdf
+- **Fiat Panda 141 - Offizieller Schaltplan**: http://www.bunkeringegnere.altervista.org/esplosi/FIAT%20PANDA/panda%20141/1100%20mpi/55%20IMPIANTO%20ELETTRICO%20-%20SCHEMI%20-%20GAMMA%202000.pdf
 
 ### Nützliche Befehle
 
@@ -1408,5 +1333,5 @@ pm2 logs obd-server             # PM2-Log
 
 ---
 
-**Letzte Aktualisierung**: v0.9.0\
+**Letzte Aktualisierung**: v0.9.0  
 **Ziel-Hardware**: Raspberry Pi 4B + Fiat Panda 141
